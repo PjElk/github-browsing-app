@@ -1,23 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const axios = require("axios");
+const userController = require("../controllers/userController");
 
-// Fetch user details
-router.get("/:username", async (req, res) => {
-  const { username } = req.params; // Extract username from URL
-  try {
-    // Fetch data from GitHub API
-    const response = await axios.get(
-      `https://api.github.com/users/${username}`
-    );
-    res.json(response.data); // Return user data
-  } catch (error) {
-    console.error("Error fetching user details:", error.message); // Log error message
-    // more detailed error response
-    res
-      .status(500)
-      .json({ error: "Error fetching user details", details: error.message });
-  }
-});
+// Route to get user details
+router.get("/:username", userController.getUserDetails); // Correctly use the getUserDetails function
+
+// Route to get user repositories
+router.get("/:username/repos", userController.getUserRepos); // Use the getUserRepos function
+
+// Route to get repository commits
+router.get("/repos/:username/:repo/commits", userController.getRepoCommits); // Use the getRepoCommits function
 
 module.exports = router;
