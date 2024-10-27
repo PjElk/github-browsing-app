@@ -11,7 +11,7 @@ const RepoCard = ({ repo }) => {
       try {
         // Fetch last 5 commits for the repository
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/users/repos/${repo.owner.login}/${repo.name}/commits`
+          `${process.env.REACT_APP_API_URL}/api/users/${repo.owner.login}/${repo.name}/commits`
         );
         setCommits(response.data); // Set commits
       } catch (error) {

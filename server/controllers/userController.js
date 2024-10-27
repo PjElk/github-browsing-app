@@ -31,14 +31,15 @@ const getUserRepos = async (req, res) => {
 
 // Fetch last commits for a specific repository
 const getRepoCommits = async (req, res) => {
-  const { owner, repo } = req.params; // Get owner and repo from request parameters
+  const { username, repo } = req.params; // Get owner and repo from request parameters
   try {
     const response = await axios.get(
-      `https://api.github.com/repos/${owner}/${repo}/commits`
+      `https://api.github.com/repos/${username}/${repo}/commits`
     );
     res.json(response.data.slice(0, 5)); // Return the last 5 commits
   } catch (error) {
-    res.status(500).json({ error: "Error fetching commits" });
+    console.error("Error fetching commits:", error); // Log the error
+    res.status(500).json({ error: "Error fetching commits" }); // Send error response
   }
 };
 

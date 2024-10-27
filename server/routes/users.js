@@ -13,6 +13,6 @@ router.get("/:username", getUserDetails); // Use controller function
 router.get("/:username/repos", getUserRepos); // Use controller function
 
 // Route to get commits for a specific repo
-router.get("/:owner/:repo/commits", getRepoCommits); // Use controller function
+router.get("/:username/:repo/commits", getRepoCommits); // Use controller function
 
 module.exports = router;
